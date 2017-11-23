@@ -23,29 +23,41 @@ void getEmail(Person & obj);
 
 int main(int argc, char const *argv[]) {
 	try {
+		//  Проверяем наличие адреса файла
 		if(argc == 1)
 			throw std::runtime_error("ERROR: have no any path...");
 
 		std::string filePath = argv[1];
-		if(!exists(filePath) )
-            throw std::runtime_error("\tERROR: Wrong address! File does not exist!");
 
-		//  Create struct & fill it
+		//  Проверяем существование файла по адресу
+		if(!exists(filePath) )
+            		throw std::runtime_error("\tERROR: Wrong address! File does not exist!");
+
+		//  Создаем структуру и заполняем поля
 		Person Obj;
 
 		std::cout << "Enter data to fields of the Person structure." << std::endl;
 		std::cout << "First name:" << std::endl;
-		std::cin >> Obj.first_name;
+		std::cout << "Uliana" << std::endl;
+		// std::cin >> Obj.first_name;
+		Obj.first_name = "Uliana";
 		std::cout << "Last name:" << std::endl;
-		std::cin >> Obj.last_name;
+		std::cout << "Koshkina" << std::endl;
+		// std::cin >> Obj.last_name;
+		Obj.last_name = "Koshkina";
 		std::cout << "Email:" << std::endl;
+		std::cout << "uliana_k@gmail.com" << std::endl;
 		getEmail(Obj);
 		std::cout << "Age(optional):" << std::endl;
-		std::cin >> Obj.age;
+		std::cout << "19" << std::endl;
+		// std::cin >> Obj.age;
+		Obj.age = 19;
 		std::cout << "Phone(optional):" << std::endl;
-		std::cin >> Obj.phone;
+		std::cout << "8(495)-123-45-67" << std::endl;
+		// std::cin >> Obj.phone;
+		Obj.phone = "8(495)-123-45-67";
 
-
+		//  Создаем объект json в виде структуры и заполняем его данными из объекта Person
 		json serialization = {
 			{ "Fisrt name",	Obj.first_name },
 			{ "Last name",	Obj.last_name },
@@ -54,7 +66,7 @@ int main(int argc, char const *argv[]) {
 			{ "Phone",		Obj.phone }
 		};
 
-		// write prettified JSON to another file
+		//  Записываем данные в конфигурационный файл json
 		std::ofstream output( argv[1] );
 		output << serialization << std::endl;
 		output.close();
@@ -66,9 +78,10 @@ int main(int argc, char const *argv[]) {
 	return 0;
 }
 
+//  Функция для разделение почтового адреса
 void getEmail(Person & _obj) {
-	std::string console_email;
-  	std::cin >> console_email;
+	std::string console_email = "uliana_k@gmail.com";
+  	// std::cin >> console_email;
 
   	std::string::size_type symbol = console_email.find("@");
 
