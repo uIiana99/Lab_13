@@ -1,0 +1,17 @@
+sudo: true
+language: cpp
+compiler: gcc
+
+addons:
+  apt:
+    sources:
+      - george-edison55-precise-backports
+    packages:
+      - cmake
+      - cmake-data
+
+script:
+- cmake -H. -B_build 
+- cmake --build _build
+- _build/pack artifacts/person1.json
+- _build/unpack artifacts/person1.json
