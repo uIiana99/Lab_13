@@ -26,13 +26,13 @@ int main(int argc, char const *argv[]) {
 	try {
 		//  Проверяем наличие адреса файла
 		if(argc == 1)
-			throw std::runtime_error("\tERROR: have no any path...");
+			throw std::runtime_error("\tError: does not have any path...");
 
 		std::string filePath = argv[1];
 
 		//  Проверяем существование файла по адресу
 		if(!exists(filePath) )
-            throw std::runtime_error("\tERROR: Wrong address! File does not exist!");
+            throw std::runtime_error("\tError: did not find any files");
 		
 		//  Создаем объект json и записываем в него данные из конфигурационного файла json
 		std::ifstream input( argv[1] );
@@ -69,7 +69,7 @@ std::string getNickname(std::string _email) {
   	std::string::size_type symbol = _email.find("@");
 
   	if(symbol == std::string::npos)
-  		throw std::runtime_error("\tERROR: incorret email address...");
+  		throw std::runtime_error("\tERROR: email address does not exist...");
 
 	return _email.substr(0, symbol);
 }
@@ -79,7 +79,7 @@ std::string getServer(std::string _email) {
 	std::string::size_type symbol = _email.find("@");
 
   	if(symbol == std::string::npos)
-  		throw std::runtime_error("\tERROR: incorret email address...");
+  		throw std::runtime_error("\tError: email address does not exist...");
 
 	return _email.substr(symbol);
 }
