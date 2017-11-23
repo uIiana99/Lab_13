@@ -25,13 +25,13 @@ int main(int argc, char const *argv[]) {
 	try {
 		//  Проверяем наличие адреса файла
 		if(argc == 1)
-			throw std::runtime_error("ERROR: have no any path...");
+			throw std::runtime_error("Error: does not have any path...");
 
 		std::string filePath = argv[1];
 
 		//  Проверяем существование файла по адресу
 		if(!exists(filePath) )
-            		throw std::runtime_error("\tERROR: Wrong address! File does not exist!");
+            		throw std::runtime_error("\tError: did not found any files");
 
 		//  Создаем структуру и заполняем поля
 		Person Obj;
@@ -86,7 +86,7 @@ void getEmail(Person & _obj) {
   	std::string::size_type symbol = console_email.find("@");
 
   	if(symbol == std::string::npos)
-  		throw std::runtime_error("ERROR: incorret email address...");
+  		throw std::runtime_error("Error: email address does not exist...");
 
 	_obj.email.nickname = console_email.substr(0, symbol);
 	_obj.email.server = console_email.substr(symbol);
