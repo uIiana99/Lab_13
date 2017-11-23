@@ -24,18 +24,23 @@ std::string getServer(std::string _email);
 
 int main(int argc, char const *argv[]) {
 	try {
+		//  Проверяем наличие адреса файла
 		if(argc == 1)
 			throw std::runtime_error("\tERROR: have no any path...");
 
 		std::string filePath = argv[1];
+
+		//  Проверяем существование файла по адресу
 		if(!exists(filePath) )
             throw std::runtime_error("\tERROR: Wrong address! File does not exist!");
 		
+		//  Создаем объект json и записываем в него данные из конфигурационного файла json
 		std::ifstream input( argv[1] );
 		json deserialization;
 		input >> deserialization;
 		input.close();
 
+		//  Создаем объект структуры персон и заполняем его с помощью объекта json
 		Person Obj;
 
 		Obj.first_name = deserialization["Fisrt name"];
@@ -59,6 +64,7 @@ int main(int argc, char const *argv[]) {
 	return 0;
 }
 
+//  Функция для получения nickname из почтового адреса
 std::string getNickname(std::string _email) {
   	std::string::size_type symbol = _email.find("@");
 
@@ -68,6 +74,7 @@ std::string getNickname(std::string _email) {
 	return _email.substr(0, symbol);
 }
 
+//  Функция для получения server из почтового адреса
 std::string getServer(std::string _email) {
 	std::string::size_type symbol = _email.find("@");
 
